@@ -34,7 +34,7 @@ This solution helps ensure data quality, compliance readiness, and operational v
 
 Recommended project folder structure:
 
-pep-stats-excel-generator/
+#pep-stats-excel-generator/
 │
 ├── stats.py # Main script
 ├── README.md # Project documentation
@@ -52,7 +52,7 @@ pep-stats-excel-generator/
 │
 └── logs/
 └── (optional log files)
-
+#
 
 ---
 
