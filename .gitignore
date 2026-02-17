@@ -1,0 +1,21 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.log
+.venv/
+stats/
+stats.py
+
+# Excel temp files
+~$*.xlsx
+templet.xlsx
+
+# Outputs (optional)
+PEP_STATS_*.xlsx
+query.txt
+
+
+# Local config (optional if you have secrets)
+.env
