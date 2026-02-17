@@ -146,17 +146,3 @@ This project is intended for internal and educational use.
 
 
 ---
-
-# Next Step
-
-Save this file as:
-
-README.md
-
-
-Then push:
-
-```bash
-git add README.md
-git commit -m "Added README documentation"
-git push
