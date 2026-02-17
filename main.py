@@ -31,9 +31,9 @@ PG = {
 SCHEMA = "public"
 TABLE = "your_table_name"
 
-INPUT_XLSX = r"C:\miscellaneous\stats\input.xlsx"
-TEMPLATE_XLSX = r"C:\miscellaneous\stats\templet.xlsx"
-OUTPUT_XLSX = r"C:\miscellaneous\stats\PEP_STATS_10022026.xlsx"
+INPUT_XLSX = r" path_to_input.xlsx"
+TEMPLATE_XLSX = r"path_to_templet.xlsx"
+OUTPUT_XLSX = r"path_to_output.xlsx"
 
 PEP_TYPE_PRIORITY = [
     "HOS", "CAB", "LEG", "MIL", "DIP", "INT",
