@@ -45,7 +45,7 @@ pip install pandas psycopg2-binary openpyxl
 Database Requirements
 Expected PostgreSQL table:
 
-public.new_master_unified_final
+public.add_your_database_table_name
 Required fields include:
 
 is_pep
