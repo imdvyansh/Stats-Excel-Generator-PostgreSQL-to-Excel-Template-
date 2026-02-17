@@ -1,162 +1,370 @@
-# PEP Stats Excel Generator
-
-## Overview
-
-The PEP Stats Excel Generator is a Python-based reporting tool that extracts country-wise Politically Exposed Persons (PEP) statistics from a PostgreSQL database and generates a structured Excel report using a predefined template.
-
-This tool helps monitor data coverage, completeness, and distribution of PEP profiles across different countries, roles, and hierarchy levels.
-
-> Note: This public version does not include SQL queries. Internal queries can be added in the placeholder function.
+# PEP Stats Excel Generator (PostgreSQL → Excel Template)
 
 ---
 
-## Features
+# 1. System Overview
 
-- Country-wise PEP statistics generation
-- Excel template-based reporting with preserved formatting
-- Supports merged Excel headers
-- Role and Level matrix support (HOS, CAB, LEG, etc.)
-- Automatic country code parsing from input file
-- Optional database index creation for performance optimization
-- Modular and scalable design
+The PEP Stats Excel Generator is a Python-based reporting and validation system designed to extract, aggregate, and analyze Politically Exposed Person (PEP) data from a PostgreSQL database and generate structured country-wise statistical reports in Excel format.
+
+The system automates the calculation of compliance metrics, hierarchy distribution, and data completeness, and writes results into a predefined Excel template while preserving formatting and structure.
+
+This solution helps ensure data quality, compliance readiness, and operational visibility for large-scale PEP datasets.
 
 ---
 
-## Project Structure
+# 2. Project Structure
 
-pep-stats-generator/
+Recommended project folder structure:
+
+# PEP Stats Excel Generator (PostgreSQL → Excel Template)
+
+---
+
+# 1. System Overview
+
+The PEP Stats Excel Generator is a Python-based reporting and validation system designed to extract, aggregate, and analyze Politically Exposed Person (PEP) data from a PostgreSQL database and generate structured country-wise statistical reports in Excel format.
+
+The system automates the calculation of compliance metrics, hierarchy distribution, and data completeness, and writes results into a predefined Excel template while preserving formatting and structure.
+
+This solution helps ensure data quality, compliance readiness, and operational visibility for large-scale PEP datasets.
+
+---
+
+# 2. Project Structure
+
+Recommended project folder structure:
+
+pep-stats-excel-generator/
 │
 ├── stats.py # Main script
-├── README.md # Documentation
+├── README.md # Project documentation
+├── requirements.txt # Python dependencies
 ├── .gitignore # Git ignore rules
-├── input.xlsx # Input country list (example)
-├── templet.xlsx # Excel template
-└── output.xlsx # Generated report
+│
+├── input/
+│ └── input.xlsx # Country code input file
+│
+├── template/
+│ └── templet.xlsx # Excel template with headers
+│
+├── output/
+│ └── PEP_STATS.xlsx # Generated report output
+│
+└── logs/
+└── (optional log files)
 
 
 ---
 
-## Requirements
+# 3. System Architecture
 
-Install required Python packages:
+## Architecture Diagram
 
-```bash
-pip install pandas psycopg2-binary openpyxl
-Database Requirements
-Expected PostgreSQL table:
++-------------------+
+| Input Excel |
+| (Country Codes) |
++-------------------+
+|
+v
 
-public.new_master_unified_final
-Required fields include:
++-------------------+
+| Python Script |
+| stats.py |
+| |
+| - Parse input |
+| - Run queries |
+| - Aggregate data |
+| - Map template |
++-------------------+
+|
+v
 
-is_pep
++----------------------------+
+| PostgreSQL Database |
+| new_master_unified_final |
+| |
+| - PEP records |
+| - Role & level data |
+| - JSONB structured data |
++----------------------------+
+|
+v
 
-pep_country_code
++-----------------------------+
+| Processing Engine |
+| |
+| - Compute metrics |
+| - Hierarchy analysis |
+| - Completeness analysis |
++-----------------------------+
+|
+v
 
-subject_type
++-----------------------------+
+| Excel Template |
+| templet.xlsx |
+| |
+| - Structured headers |
+| - Preserved formatting |
++-----------------------------+
+|
+v
 
-pep_type
-
-pep_level
-
-DOB
-
-locations
-
-alias_name
-
-image_url
-
-gender
-
-position
-
-(Note: SQL queries are intentionally removed in public version.)
-
-Configuration
-Update database connection in stats.py:
-
-PG = {
-    "dbname": "testdatabase",
-    "user": "your_user",
-    "password": "your_password",
-    "host": "localhost",
-    "port": 5432,
-}
-Update file paths:
-
-INPUT_XLSX = "input.xlsx"
-TEMPLATE_XLSX = "templet.xlsx"
-OUTPUT_XLSX = "output.xlsx"
-How to Run
-Run the script:
-
-python stats.py
-Output will be generated at:
-
-output.xlsx
-How It Works
-Reads country codes from input Excel
-
-Connects to PostgreSQL database
-
-Fetches statistics for each country (placeholder in public version)
-
-Maps results to Excel template
-
-Generates formatted report
-
-Future Scope
-Automated scheduled reporting
-
-Dashboard integration (Kibana / PowerBI)
-
-Data quality scoring
-
-Historical trend analysis
-
-API integration
-
-Scalable reporting for large datasets
-
-Business Impact
-Improves compliance reporting efficiency
-
-Helps monitor data completeness and quality
-
-Reduces manual reporting effort
-
-Enables faster validation after data ingestion
-
-Supports operational and compliance decision-making
-
-Security Notice
-This public repository does not include SQL queries or sensitive logic.
-
-Internal SQL queries should be added in:
-
-fetch_stats_for_country()
-Author
-Divyansh Kumar
-
-Machine Learning & Data Engineer
-Specializing in PostgreSQL, Elasticsearch, and AI Systems
-
-License
-This project is intended for internal and educational use.
-
++-----------------------------+
+| Output Excel Report |
+| PEP_STATS.xlsx |
+| |
+| - Country statistics |
+| - Role-level distribution |
+| - Data completeness |
++-----------------------------+
 
 ---
 
-# Next Step
+# 4. Uses of This System
 
-Save this file as:
+## Compliance and Regulatory Reporting
 
-README.md
+This system helps compliance teams monitor PEP data coverage across countries and ensure datasets meet regulatory and screening requirements.
 
+Supports:
 
-Then push:
+- PEP dataset validation  
+- Compliance reporting  
+- Regulatory audits  
 
-```bash
-git add README.md
-git commit -m "Added README documentation"
-git push
+---
+
+## Data Quality Monitoring
+
+Helps identify missing or incomplete data fields such as:
+
+- Missing Date of Birth  
+- Missing Address  
+- Missing Image  
+- Missing Position  
+
+Enables data enrichment teams to improve dataset quality.
+
+---
+
+## Data Engineering Validation
+
+Used by data engineers to validate:
+
+- Data ingestion pipelines  
+- Database updates  
+- Data integrity after bulk imports  
+
+Ensures pipeline reliability.
+
+---
+
+## Operational Reporting
+
+Provides country-level operational metrics including:
+
+- Total PEP counts  
+- Role hierarchy distribution  
+- Dataset coverage statistics  
+
+Supports operational decision-making.
+
+---
+
+## Risk and Intelligence Analysis
+
+Role and hierarchy distribution helps identify political influence levels and risk distribution across countries.
+
+Supports:
+
+- Risk analysis  
+- Intelligence reporting  
+- Political exposure analysis  
+
+---
+
+## KPI Monitoring
+
+Helps organizations track key performance indicators such as:
+
+- Percentage of profiles with complete data  
+- Dataset growth rate  
+- Coverage improvements  
+
+---
+
+# 5. Data Processing Workflow
+
+## Step 1 — Input Processing
+
+Reads input Excel file and extracts country codes.
+
+Supports:
+
+- Single values  
+- Multiple values  
+- Comma-separated values  
+- JSON array format  
+
+---
+
+## Step 2 — Database Connection
+
+Connects securely to PostgreSQL database using psycopg2.
+
+Accesses PEP dataset.
+
+---
+
+## Step 3 — Data Aggregation
+
+Computes:
+
+- Total PEP count  
+- Root PEP count  
+- Organization PEP count  
+- SOE count  
+
+---
+
+## Step 4 — Data Completeness Analysis
+
+Checks presence of:
+
+- DOB  
+- Address  
+- Alias  
+- Image  
+- Gender  
+- Position  
+
+---
+
+## Step 5 — Hierarchy Analysis
+
+Computes:
+
+- PEP Level distribution  
+- Role × Level matrix  
+
+Roles include:
+
+- HOS
+- CAB
+- LEG
+- MIL
+- DIP
+- INT
+- GCO
+- NIO
+- INF
+- JUD
+- POL
+- MUN
+- REG
+- ISO
+
+---
+
+## Step 6 — Excel Output Generation
+
+Writes statistics into Excel template while preserving formatting.
+
+Generates structured report.
+
+---
+
+# 6. Technical Capabilities
+
+Supports:
+
+- PostgreSQL JSONB processing
+- Large dataset handling
+- Template-based reporting
+- Hierarchical data analysis
+- Role classification
+- Index optimization
+- Scalable reporting
+
+---
+
+# 7. Future Scope
+
+The system can be extended to support:
+
+- Automated report scheduling
+- Real-time dashboards
+- API-based reporting
+- Historical trend tracking
+- Data quality scoring
+- Enterprise reporting pipelines
+
+---
+
+# 8. Future Scope & Business Impact
+
+## Business Impact
+
+### Improved Compliance Efficiency
+
+Automates reporting and improves compliance readiness.
+
+---
+
+### Improved Data Quality
+
+Identifies missing and incomplete data.
+
+Improves enrichment quality.
+
+---
+
+### Reduced Operational Cost
+
+Eliminates manual report generation.
+
+Reduces human error.
+
+---
+
+### Faster Validation
+
+Quickly validates database updates and ingestion.
+
+---
+
+### Improved Decision Making
+
+Provides structured data insights.
+
+Supports strategic planning.
+
+---
+
+### Enterprise Integration
+
+Can integrate with enterprise systems such as:
+
+- Dashboards
+- Data pipelines
+- Reporting platforms
+
+---
+
+# 9. Long-Term Vision
+
+This system can evolve into a full enterprise PEP analytics and monitoring platform supporting:
+
+- Automated compliance dashboards  
+- Real-time validation pipelines  
+- Global coverage monitoring  
+- Enterprise-level reporting  
+
+---
+
+# 10. Summary
+
+The PEP Stats Excel Generator provides a scalable and automated solution for extracting, analyzing, and reporting PEP statistics from PostgreSQL databases.
+
+It improves compliance reporting, operational efficiency, data validation, and provides a foundation for future enterprise analytics systems.
