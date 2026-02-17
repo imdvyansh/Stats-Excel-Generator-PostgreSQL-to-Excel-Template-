@@ -32,7 +32,7 @@ SCHEMA = "public"
 TABLE = "your_table_name"
 
 INPUT_XLSX = r" path_to_input.xlsx"
-TEMPLATE_XLSX = r"path_to_templet.xlsx"
+TEMPLATE_XLSX = r"path_to_templet copy.xlsx"
 OUTPUT_XLSX = r"path_to_output.xlsx"
 
 PEP_TYPE_PRIORITY = [
