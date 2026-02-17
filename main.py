@@ -21,15 +21,15 @@ from datetime import datetime
 
 # ---------------- CONFIG ----------------
 PG = {
-    "dbname": "testdatabase",
-    "user": "divyansh",
-    "password": "admin",  # Recommended: move to .env file for production
+    "dbname": "your_database_name",
+    "user": "user",
+    "password": "password",  # Recommended: move to .env file for production
     "host": "localhost",
     "port": 5432,
 }
 
 SCHEMA = "public"
-TABLE = "new_master_unified_final"
+TABLE = "your_table_name"
 
 INPUT_XLSX = r"C:\miscellaneous\stats\input.xlsx"
 TEMPLATE_XLSX = r"C:\miscellaneous\stats\templet.xlsx"
